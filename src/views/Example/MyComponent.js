@@ -1,5 +1,6 @@
 import React from 'react';
-
+import ChildComponent  from "./ChildComponent";
+import  AddComponents from "./AddComponents";
 class MyComponent extends React.Component {
     /*
     Variable trong JSX
@@ -13,7 +14,17 @@ class MyComponent extends React.Component {
     }*/
     state ={
         firstName: '',
-        lastName: ''
+        lastName: '',
+        arrJobs:[{id:'abc1', title:'dev', salary:'500 '},
+                {id:'abc2', title:'tester', salary:'400 '},
+                {id:'abc3', title:'engineer', salary:'600 '}]
+    }
+    addNewJobs = (job) => {
+        this.setState ({
+            // push them job tu input vao
+            arrJobs: [...this.state.arrJobs,job]
+        })
+        console.log('check job from parent',job)
     }
    /* handleOnChangeName =(event) => {
         // this.state.nam = event.target.value; //bad code // khong nen dung
@@ -27,8 +38,9 @@ class MyComponent extends React.Component {
     handleClickButton = () => {
         console.log('hit the button');
         alert('Click me')
+
     }*/
-   handChangeFirstName = (event) => {
+  /* handChangeFirstName = (event) => {
        this.setState({
            firstName: event.target.value
        })
@@ -37,8 +49,12 @@ class MyComponent extends React.Component {
        this.setState({
            lastName: event.target.value
        })
-   }
-
+   }*/
+   /*handlSubmit = (event) =>{
+       event.preventDefault()
+       console.log('>>check data input: ', this.state)
+   }*/
+   
 //re - render
     render() {
         console.log( '>>> call render: ' ,this.state)
@@ -48,7 +64,11 @@ class MyComponent extends React.Component {
             <>
             {/*<div className="abc">*/}
             {/*<div className="first">*/}
-                <form action="">
+                <AddComponents
+                    addNewJobs ={this.addNewJobs}
+                />
+
+                {/*<form action="">
                     <label>First name</label>
                     <input
                         type="text"
@@ -63,8 +83,9 @@ class MyComponent extends React.Component {
                             onChange={(event)=> this.handChangeLastName(event)}
                     />
                     <br/> <br/>
-                    <button>submit</button>
-                </form>
+                    <button type="submit" value="Submit"
+                            onClick={(event => this.handlSubmit (event))}>Submit</button>
+                </form>*/}
                 {/*<input value={this.state.name} type="text"
                     onChange={(event) => this.handleOnChangeName(event)}
                 />
@@ -77,6 +98,16 @@ class MyComponent extends React.Component {
                     <button onClick={this.handleClickButton}>Click me</button>
                 </div>*/}
              {/*</div>*/}
+
+                <ChildComponent
+                    name={this.state.firstName}
+                    age={'20'}
+                    address={'Da Nang'}
+                    arrJobs={this.state.arrJobs}// truyền từ childComponent vào
+                />
+                {/*props:properties*/}
+                {/*<ChildComponent name ={'child two'}/>*/}
+                {/*<ChildComponent name ={'child three'}/>*/}
             </>
 
         )

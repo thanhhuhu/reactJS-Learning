@@ -27,6 +27,7 @@ function App() {
           Learn React
         </a>
         <MyComponent />
+        {/*component này là con của component app*/}
       </header>
     </div>
   );
