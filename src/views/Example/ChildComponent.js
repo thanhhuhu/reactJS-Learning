@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './demo.css'
 /*
 class ChildComponent extends React.Component {
     /!*
@@ -92,6 +92,11 @@ class ChildComponent extends React.Component {
             showJobs: !this.state.showJobs // phu dinh lai neu show la true thi hide la false
         })
     }
+    //arrow function to delete row
+    handleOnClickDelete = (job) => {
+        console.log('handleOnClickDelete', job);
+        this.props.deleteAJob(job);
+    };
     render (){
         let {arrJobs} = this.props
         let {showJobs} = this.state
@@ -102,8 +107,8 @@ class ChildComponent extends React.Component {
         return (
             <>
                 {showJobs === false &&
-                    <div>
-                        <button onClick={()=> this.handleShowHide()}>Show</button>
+                    <div >
+                        <button className ="btn-show" onClick={()=> this.handleShowHide()}>Show</button>
                     </div>
                 }
                 {showJobs === true &&
@@ -115,6 +120,7 @@ class ChildComponent extends React.Component {
                                         return (
                                             <div key={item.id}>
                                                 {item.title} - {item.salary} $
+                                                <> </> <span onClick={()=> this.handleOnClickDelete(item)}>x</span>
                                             </div>
                                         )
                                     }

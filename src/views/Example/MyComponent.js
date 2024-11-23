@@ -20,12 +20,26 @@ class MyComponent extends React.Component {
                 {id:'abc3', title:'engineer', salary:'600 '}]
     }
     addNewJobs = (job) => {
+        // cach push job vao trong arrJobs, cach basic nhat
+        console.log('check job from parrent: ', job)
+        // let currentJob = this.state.arrJobs;
+        // currentJob.push(job)
         this.setState ({
             // push them job tu input vao
+            // tao ra mot array, ... (dau 3 cham ) toan tu copy, copy toan bo cac phan tu trong arrayJobs o tren, ",job" day phan tu vao
             arrJobs: [...this.state.arrJobs,job]
+            // arrJobs: currentJob
         })
         console.log('check job from parent',job)
     }
+    //arrow function to delete job
+    deleteAJob = (job) => {
+        let currentJobs = this.state.arrJobs;
+        currentJobs = currentJobs.filter(item => item.id !== job.id);
+        this.setState({
+            arrJobs: currentJobs
+        });
+    };
    /* handleOnChangeName =(event) => {
         // this.state.nam = event.target.value; //bad code // khong nen dung
         //merge
@@ -100,10 +114,12 @@ class MyComponent extends React.Component {
              {/*</div>*/}
 
                 <ChildComponent
-                    name={this.state.firstName}
+                   /* name={this.state.firstName}
                     age={'20'}
                     address={'Da Nang'}
-                    arrJobs={this.state.arrJobs}// truyền từ childComponent vào
+                    arrJobs={this.state.arrJobs}// truyền từ childComponent vào*/
+                    arrJobs={this.state.arrJobs}
+                    deleteAJob={this.deleteAJob}
                 />
                 {/*props:properties*/}
                 {/*<ChildComponent name ={'child two'}/>*/}
